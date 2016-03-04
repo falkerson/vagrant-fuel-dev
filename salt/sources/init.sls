@@ -69,6 +69,14 @@ fuel-specs-source:
     - require:
       - file: sources-directory
 
+fuel-ui-source:
+  git.latest:
+    - name: https://github.com/stackforge/fuel-ui
+    - target: /vagrant/sources/fuel-ui
+    - unless: ls /vagrant/sources/fuel-ui
+    - require:
+      - file: sources-directory
+
 fuel-web-source:
   git.latest:
     - name: https://github.com/stackforge/fuel-web

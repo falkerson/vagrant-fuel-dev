@@ -23,6 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network :forwarded_port, guest: 80, host: 8080
   config.vm.network :forwarded_port, guest: 80, host: 8280
   config.vm.network :forwarded_port, guest: 8000, host: 8200
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -39,9 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     rsync__args: ["--verbose", "--archive", "-z", "--delete"],
     rsync__exclude: [
         '*/.tox',
-        'nailgun/static/js/libs/bower',
-        'nailgun/node_modules',
-        'test_run'
+        'fuel-ui/node_modules'
     ],
     create: true
 
@@ -65,12 +64,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider :virtualbox do |vb|
-    vb.name = "vagrant-mirantis-test"
+    vb.name = "vagrant-mirantis"
     #   # Don't boot with headless mode
     #   vb.gui = true
     #
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--ioapic", "on", "--memory", "800"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
   #
   # View the documentation for the provider you're using for more
