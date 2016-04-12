@@ -45,6 +45,14 @@ fuel-main-source:
     - require:
       - file: sources-directory
 
+fuel-nailgun-agent:
+  git.latest:
+    - name: https://github.com/openstack/fuel-nailgun-agent
+    - target: /vagrant/sources.fuel-nailgun-agent
+    - unless: ls /vagrant/sources/fuel-nailgun-agent
+    - require:
+      - file: sources-directory
+
 fuel-plugins-source:
   git.latest:
     - name: https://github.com/stackforge/fuel-plugins
